@@ -32,6 +32,7 @@ function VotingModalButton(props: VotingModalButtonProps) {
 
   const closeModal = () => setModalOptions({ isOpen: false });
 
+  console.log('>>>> proposal', proposal)
   useEffect(() => {
     setIsActive(checkedChoice !== -1 && proposal.state !== "pending" && !isTokenBalanceLoading && isEnoughBalanceToPublish);
   }, [checkedChoice, proposal.state, isTokenBalanceLoading, isEnoughBalanceToPublish]);

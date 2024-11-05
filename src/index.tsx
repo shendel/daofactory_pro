@@ -20,7 +20,7 @@ window.TRANSLATE = {
 }
 */
 
-const appElement = document.getElementById("daofactory_app")
+const appElement = document.getElementById("daofactory_pro_app")
 
 ReactDOM.render(
   <React.StrictMode>

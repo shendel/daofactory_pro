@@ -108,7 +108,7 @@ function CreateProposalActions(props: CreateProposalActionsType) {
           symbol: window.TOKEN_SYMBOL,
           address: window.TOKEN_ADDRESS,
           decimals: parseInt(window.TOKEN_DECIMALS),
-          minBalance: 1,
+          minBalance: Number(window.REQUIRED_AMOUNT_TO_VOTE),
         }
       }
       const getStrategy = () => {

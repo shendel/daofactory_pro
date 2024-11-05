@@ -161,6 +161,17 @@ class DaoFactory_Pro_Meta_Box {
         </td>
       </tr>
       <tr>
+        <th>
+          <label><?php echo esc_html__( 'Strategy', 'daofactory_pro' ); ?></label>
+        </th>
+        <td>
+          <select name="dao_strategy" id="dao_strategy" value="<?php echo $daoinfo['strategy']?>">
+            <option value="0"><?php echo esc_html__('Amount is Power (erc20-balance-of)', 'daofactory_pro' );?></option>
+            <option value="1"><?php echo esc_html__('One user - one vote (erc20-with-balance)', 'daofactory_pro' );?></option>
+          </select>
+        </td>
+      </tr>
+      <tr>
         <th><label><?php echo esc_html__( 'Required tokens amount to Vote', 'daofactory_pro' ); ?></label></th>
         <td>
           <div class="daofactory-form-inline">
@@ -205,6 +216,7 @@ class DaoFactory_Pro_Meta_Box {
       'token_symbol'      => 'dao_token_symbol',
       'token_decimals'    => 'dao_token_decimals',
       'theme'             => 'dao_theme',
+      'strategy'          => 'dao_strategy',
       'required_amount_to_publish' => 'dao_required_amount_to_publish',
       'required_amount_to_vote' => 'dao_required_amount_to_vote',
     );

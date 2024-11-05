@@ -1,7 +1,7 @@
 const initAppConfig = () => {
   const appElement = document.getElementById("daofactory_pro_app")
 
-  window.TIME_ZONE_CUSTOM = appElement?.getAttribute("data-timezone-custom") || true;
+  window.TIME_ZONE_CUSTOM = appElement?.getAttribute("data-timezone-custom") || false;
   window.TIME_ZONE = appElement?.getAttribute("data-timezone") || Intl.DateTimeFormat().resolvedOptions().timeZone;
   window.TIME_ZONE_ADD = appElement?.getAttribute("data-timezone-add") || "";
   window.TIME_ZONE_LOCALE = appElement?.getAttribute("data-timezone-locale") || "en";

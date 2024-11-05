@@ -10,6 +10,7 @@ function daofactory_pro_get_data($dao_id) {
     'hide_footer_header'=> 'true',
     'hide_service_link' => 'false',
     'theme'             => 'light',
+    'strategy'          => '0',
     'required_amount_to_publish' => '5',
     'required_amount_to_vote' => '1',
   ) as $key => $default) {
@@ -19,7 +20,25 @@ function daofactory_pro_get_data($dao_id) {
   }
   return $daoinfo;
 }
-
+function daofactory_pro_get_html($dao_id) {
+  $daoinfo = daofactory_pro_get_data( $dao_id );
+  $html = '
+    <div
+    id="daofactory_pro_app"
+    data-ens="' . esc_attr('onout.eth') . '"
+    data-network="' . esc_attr(daofactory_pro_blockchains()[$daoinfo['blockchain']]['chainId']) . '"
+    data-token-address="' . esc_attr($daoinfo['token']) . '"
+    data-token-symbol="' . esc_attr($daoinfo['token_symbol']) . '"
+    data-token-decimals="' . esc_attr($daoinfo['token_decimals']) . '"
+    data-color-template="' . esc_attr($daoinfo['theme']) . '_template"
+    data-hide-service-link="' . esc_attr($daoinfo['hide_service_link']) . '"
+    data-required-amount-to-publish="' . esc_attr($daoinfo['required_amount_to_publish']) . '"
+    data-required-amount-to-vote="' . esc_attr($daoinfo['required_amount_to_vote']) . '"
+    data-strategy="' . esc_attr($daoinfo['strategy']) . '"
+    ></div>
+  ';
+  return $html;
+}
 
 
 function daofactory_pro_blockchains() {
@@ -151,7 +170,7 @@ function daofactory_pro_default_header($daoinfo) {
 
 function daofactory_pro_default_footer($daoinfo) {
   ?>
-      <link media="all" rel="stylesheet" href="<?php echo DAOFACTORY_PRO_URL ?>build/static/css/main.css?ver=<?php echo DAOFACTORY_VER?>" />
+      <link media="all" rel="stylesheet" href="<?php echo DAOFACTORY_PRO_URL ?>build/static/css/main.css?ver=<?php echo DAOFACTORY_PRO_VER?>" />
       <script src="<?php echo DAOFACTORY_PRO_URL ?>build/static/js/main.js?ver=<?php echo DAOFACTORY_PRO_VER?>"></script>
     </body>
   </html>
