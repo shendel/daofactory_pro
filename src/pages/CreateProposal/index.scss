@@ -1,0 +1,25 @@
+.createProposal {
+}
+
+@mixin reset-input {
+  outline: none;
+  color: var(--link-color);
+  background-color: transparent;
+  border: none;
+}
+
+.createTitleInput {
+  @include reset-input;
+
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 50px;
+}
+
+.createBodyTextArea {
+  @include reset-input;
+
+  resize: none;
+  overflow: hidden;
+  font-size: 22px;
+}

@@ -1,0 +1,77 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1040;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modalWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1050;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  outline: 0;
+}
+
+.daoModal {
+  z-index: 100;
+  background: var(--bg-color);
+  position: absolute;
+  float: left;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%);
+  border-radius: 0.5rem;
+  max-height: calc(100vh - 120px);
+  max-width: 440px;
+  width: 100%;
+  margin: 1.75rem auto;
+
+  a {
+    color: inherit; /* blue colors for links too */
+    text-decoration: inherit !important; /* no underline */
+  }
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.headerContent {
+  color: var(--link-color);
+  font-size: x-large;
+  font-weight: 600;
+}
+
+.modalBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &.haveContentAbove {
+    border-top: 1px solid var(--border-color);
+  }
+}
+
+.modalCloseButton {
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--link-color);
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+
+  &.haveContentAbove {
+    border-top: 1px solid var(--border-color);
+  }
+}

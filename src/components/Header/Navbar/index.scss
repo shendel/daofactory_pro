@@ -1,0 +1,17 @@
+.navbar {
+  display: flex;
+}
+
+.navbar-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  color: inherit;
+  text-decoration: inherit !important; /* no underline */
+  outline: none;
+
+  &.active {
+    color: var(--link-color);
+  }
+}
