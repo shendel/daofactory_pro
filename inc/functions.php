@@ -22,10 +22,26 @@ function daofactory_pro_get_data($dao_id) {
 }
 function daofactory_pro_get_html($dao_id) {
   $daoinfo = daofactory_pro_get_data( $dao_id );
+  
+  $daofactory_pro_backend_type = get_option('daofactory_pro_backend_type', 'DEFAULT');
+  $daofactory_pro_backend = get_option('daofactory_pro_backend','');
+  $daofactory_pro_space_type = get_option('daofactory_pro_space_type', 'DEFAULT');
+  $daofactory_pro_space = get_option('daofactory_pro_space', '');
+  $daofactory_pro_infurakey = get_option('daofactory_pro_infurakey', '');
+  $daofactory_pro_wc2_enabled = get_option('daofactory_pro_wc2_enabled', 'false');
+  $daofactory_pro_wc2_pr_id = get_option('daofactory_pro_wc2_pr_id', '');
+  $daofactory_pro_coinbase_enabled = get_option('daofactory_pro_coinbase_enabled', 'false');
+  
+  
+  $ens = ($daofactory_pro_space_type == 'DEFAULT')
+    ? 'onout.eth'
+    : $daofactory_pro_space;
+      
+
   $html = '
     <div
     id="daofactory_pro_app"
-    data-ens="' . esc_attr('onout.eth') . '"
+    data-ens="' . esc_attr($ens) . '"
     data-network="' . esc_attr(daofactory_pro_blockchains()[$daoinfo['blockchain']]['chainId']) . '"
     data-token-address="' . esc_attr($daoinfo['token']) . '"
     data-token-symbol="' . esc_attr($daoinfo['token_symbol']) . '"
@@ -35,6 +51,11 @@ function daofactory_pro_get_html($dao_id) {
     data-required-amount-to-publish="' . esc_attr($daoinfo['required_amount_to_publish']) . '"
     data-required-amount-to-vote="' . esc_attr($daoinfo['required_amount_to_vote']) . '"
     data-strategy="' . esc_attr($daoinfo['strategy']) . '"
+    data-snapshothub="' .esc_attr(($daofactory_pro_backend_type == 'DEFAULT') ? 'https://snapshothub.onout.org' : $daofactory_pro_backend) . '"
+    data-wallet-wc2="' . (($daofactory_pro_wc2_enabled == 'true') ? '1' : '0') . '"
+    data-wcv2-project-id="' . (($daofactory_pro_wc2_enabled == 'true') ? esc_attr($daofactory_pro_wc2_pr_id) : '') . '"
+    data-wallet-coinbase="' . (($daofactory_pro_coinbase_enabled == 'true') ? '1' : '0') . '"
+    data-infura-key="' . esc_attr($daofactory_pro_infurakey) . '"
     ></div>
   ';
   return $html;
@@ -137,6 +158,41 @@ function daofactory_pro_admin_scripts( $hook ) {
 }
 add_action( 'admin_enqueue_scripts', 'daofactory_pro_admin_scripts' );
 
+function daofactory_pro_save_settings() {
+	/* Check nonce */
+	check_ajax_referer( 'daofactory_pro_settings_action', 'daofactory_pro_settings_action_nonce' );
+  // backend
+  if ($_POST['daofactory_pro_backend_type'] == 'DEFAULT') {
+    update_option('daofactory_pro_backend_type', 'DEFAULT');
+  } else {
+    update_option('daofactory_pro_backend_type', 'CUSTOM');
+    update_option('daofactory_pro_backend', sanitize_text_field($_POST['daofactory_pro_backend']));
+  }
+  // space
+  if ($_POST['daofactory_pro_space_type'] == 'DEFAULT') {
+    update_option('daofactory_pro_space_type', 'DEFAULT');
+  } else {
+    update_option('daofactory_pro_space_type', 'CUSTOM');
+    update_option('daofactory_pro_space', sanitize_text_field($_POST['daofactory_pro_space']));
+  }
+  
+  update_option('daofactory_pro_infurakey', sanitize_text_field($_POST['daofactory_pro_infurakey']));
+  
+  if ($_POST['daofactory_pro_wc2_enabled'] == 'true') {
+    update_option('daofactory_pro_wc2_enabled', 'true');
+    update_option('daofactory_pro_wc2_pr_id', sanitize_text_field($_POST['daofactory_pro_wc2_pr_id']));
+  } else {
+    update_option('daofactory_pro_wc2_enabled', 'false');
+  }
+  
+  if ($_POST['daofactory_pro_coinbase_enabled'] == 'true') {
+    update_option('daofactory_pro_coinbase_enabled', 'true');
+  } else {
+    update_option('daofactory_pro_coinbase_enabled', 'false');
+  }
+}
+
+add_action( 'wp_ajax_daofactory_pro_save_settings', 'daofactory_pro_save_settings' );
 
 function daofactory_pro_default_header($daoinfo) {
   ?>

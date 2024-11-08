@@ -29,7 +29,7 @@ const initAppConfig = () => {
   window.INFURA_KEY = appElement?.getAttribute("data-infura-key") || "5ffc47f65c4042ce847ef66a3fa70d4c"
 
   window.WALLET_COINBASE = Number(appElement?.getAttribute('data-wallet-coinbase')) || 0;
-  window.WALLET_WC2 = Number(appElement?.getAttribute('data-wallet-wc2')) || 0
+  window.WALLET_WC2 = Number(appElement?.getAttribute('data-wallet-wc2')) || 1
   window.WALLET_GNOSIS = Number(appElement?.getAttribute('data-wallet-gnosis')) || 0
 
   // 0 - with power (erc20-balance-of)

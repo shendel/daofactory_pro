@@ -2,6 +2,7 @@ module.exports = {
   webpack: {
     configure: {
       output: {
+        publicPath: '{VENDOR_SOURCE}',
         filename: "static/js/[name].js",
       },
       optimization: {
@@ -11,6 +12,9 @@ module.exports = {
           chunks(chunk) {
             return false;
           },
+          cacheGroups: {
+            default:false
+          }
         },
       },
     },

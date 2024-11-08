@@ -44,18 +44,18 @@ function daofactory_pro_post_type() {
   flush_rewrite_rules( false );
 }
 add_action( 'init', 'daofactory_pro_post_type' );
-add_action('admin_menu', 'daofactory_pro_settings_page');
 
 function daofactory_pro_settings_page() {
   add_submenu_page(
     'edit.php?post_type=daofactory_pro',
     'DAO Settings',
-    'Global Settings',
+    'Settings',
     'manage_options',
     'daofactory_pro',
     'daofactory_pro_settings_page_callback'
   );
 }
+add_action('admin_menu', 'daofactory_pro_settings_page');
 
 function daofactory_pro_settings_page_callback() {
   wp_enqueue_style( 'daofactory-pro-admin', DAOFACTORY_PRO_URL . 'assets/css/daofactory-admin.css', false, DAOFACTORY_PRO_VER );
