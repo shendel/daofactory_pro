@@ -27,3 +27,4 @@ package-lock.json
 package.json
 build/
 vendor_source/static/*
+vendor/*

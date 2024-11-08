@@ -20,7 +20,50 @@ function daofactory_pro_get_data($dao_id) {
   }
   return $daoinfo;
 }
+
+
+function daofactory_pro_prepare_vendor() {
+  $version = (DAOFACTORY_PRO_VER) ? DAOFACTORY_PRO_VER : 'no';
+  $SEP = DIRECTORY_SEPARATOR;
+
+  $cache_dir = DAOFACTORY_PRO_BASE_DIR .  $SEP . 'vendor' . $SEP . DAOFACTORY_PRO_VER . $SEP;
+  $vendor_source = DAOFACTORY_PRO_BASE_DIR .  $SEP . 'vendor_source' . $SEP . 'static' . $SEP . 'js' . $SEP;
+
+  if (!file_exists($cache_dir)) {
+    $js_files = scandir($vendor_source);
+    if (!file_exists($cache_dir)) mkdir($cache_dir, 0777);
+    foreach ($js_files as $k => $file) {
+      if (is_file($vendor_source . $file)) {
+        $filename = basename($file);
+        $file_ext = explode(".", $filename);
+        $file_ext = strtoupper($file_ext[count($file_ext)-1]);
+        if ($file_ext === 'JS') {
+          $source = file_get_contents($vendor_source . $filename);
+          $count_replace = 0;
+          
+          $rep_from = array(
+            '{VENDOR_SOURCE}'
+          ); 
+          $rep_to = array(
+            DAOFACTORY_PRO_URL . 'vendor_source/static/js/../../'
+          );
+          $modified = str_replace(
+            $rep_from,
+            $rep_to,
+            $source,
+            $count_replace
+          );
+
+          file_put_contents($cache_dir . $filename, $modified);
+          chmod($cache_dir . $filename, 0777);
+        }
+      }
+    }
+  }
+}
+
 function daofactory_pro_get_html($dao_id) {
+  daofactory_pro_prepare_vendor();
   $daoinfo = daofactory_pro_get_data( $dao_id );
   
   $daofactory_pro_backend_type = get_option('daofactory_pro_backend_type', 'DEFAULT');
@@ -227,7 +270,8 @@ function daofactory_pro_default_header($daoinfo) {
 function daofactory_pro_default_footer($daoinfo) {
   ?>
       <link media="all" rel="stylesheet" href="<?php echo DAOFACTORY_PRO_URL ?>build/static/css/main.css?ver=<?php echo DAOFACTORY_PRO_VER?>" />
-      <script src="<?php echo DAOFACTORY_PRO_URL ?>build/static/js/main.js?ver=<?php echo DAOFACTORY_PRO_VER?>"></script>
+      <!--<script src="<?php echo DAOFACTORY_PRO_URL ?>build/static/js/main.js?ver=<?php echo DAOFACTORY_PRO_VER?>"></script>-->
+      <script src="<?php echo DAOFACTORY_PRO_URL ?>vendor/<?php echo DAOFACTORY_PRO_VER ?>/main.js?ver=<?php echo DAOFACTORY_PRO_VER?>"></script>
     </body>
   </html>
   <?php
