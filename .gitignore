@@ -26,3 +26,4 @@ package-lock.json
 /unminified-build
 package.json
 build/
+vendor_source/static/*
