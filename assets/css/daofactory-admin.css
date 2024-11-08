@@ -229,3 +229,17 @@
   padding: 0 12px;
   color: #fff;
 }
+
+.-dao-hidden {
+  display: none;
+}
+
+.dao-form SELECT,
+.dao-form INPUT[type="text"] {
+  width: 100%;
+  max-width: 600px;
+}
+.-dao-info {
+  display: block;
+  font-weight: bold;
+}

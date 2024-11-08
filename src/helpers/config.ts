@@ -25,9 +25,7 @@ const initAppConfig = () => {
   window.WCV2_PROJECT_ID = appElement?.getAttribute('data-wcv2-project-id') || 'acd63f90e358dc98bb85d42a708283fd';
 
   window.ALLOW_WHITE_LIST = appElement?.getAttribute('data-allow-whitelist') || 0;
-  
-  window.SNAPSHOTHUB = appElement?.getAttribute("data-snapshothub") || "http://localhost:3500"; //  "https://snapshothub.onout.org"; // "https://snapshothub.onout.org";
-  
+
   window.INFURA_KEY = appElement?.getAttribute("data-infura-key") || "5ffc47f65c4042ce847ef66a3fa70d4c"
 
   window.WALLET_COINBASE = Number(appElement?.getAttribute('data-wallet-coinbase')) || 0;
