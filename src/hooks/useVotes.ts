@@ -134,6 +134,23 @@ export async function getResults(proposal: ProposalType, votes: Vote[]) {
   }
 }
 
+async function tryGetScores(
+  scoreApiUrl: string,
+  params: any
+) {
+  try {
+    const res = await fetch(scoreApiUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ params }),
+    });
+    
+    const obj = await res.json()
+    return obj
+  } catch (err) {
+    return false
+  }
+}
 export async function getScores(
   space: string,
   strategies: any[],
@@ -150,13 +167,19 @@ export async function getScores(
       strategies,
       addresses,
     };
-    const res = await fetch(scoreApiUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ params }),
-    });
-    const obj = await res.json();
-    return obj.result.scores as any[];
+    const ourHub = await tryGetScores(window.SNAPSHOTHUB + '/api/scores/', params)
+    if (ourHub && ourHub.result) {
+      return ourHub.result.scores as any[];
+    } else {
+      const res = await fetch(scoreApiUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ params }),
+      });
+      
+      const obj = await res.json();
+      return obj.result.scores as any[];
+    }
   } catch (e) {
     return Promise.reject(e);
   }
