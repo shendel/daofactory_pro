@@ -76,13 +76,9 @@ function ProposalFlat() {
   }
 
   useEffect(() => {
-    console.log('>>> DO REFRESH ON CHANGE ACCOUNT', account)
     if (account) setNeedRefresh(account)
   }, [ account ])
 
-console.log('>>> proposalData', proposalData)
-
-console.log('>>> isLoading', isLoading)
   const haveDataForRenderOtherElements = !!(
     id &&
     space?.id &&
@@ -194,33 +190,6 @@ console.log('>>> isLoading', isLoading)
             </div>
           )}
           <ProposalVotesContent proposalData={proposalData} />
-          <div className="proposal-last-voters">
-            <h2>Last voters (10 of 1000)</h2>
-            <div className="-card">
-              <div className="-table">
-                <div className="-header">
-                  <div>{`Address`}</div>
-                  <div>{`Choise`}</div>
-                  <div>{`Vote power`}</div>
-                </div>
-                <div className="-rows">
-                  <div>{`0x2A8D...58d7`}</div>
-                  <div>{`For`}</div>
-                  <div>{`168177397.0384 KUNU`}</div>
-                </div>
-                <div className="-rows">
-                  <div>{`0x2A8D...58d7`}</div>
-                  <div>{`For`}</div>
-                  <div>{`168177397.0384 KUNU`}</div>
-                </div>
-                <div className="-rows">
-                  <div>{`0x2A8D...58d7`}</div>
-                  <div>{`For`}</div>
-                  <div>{`168177397.0384 KUNU`}</div>
-                </div>
-              </div>
-            </div>
-          </div>
         </>
       )}
     </div>
@@ -251,13 +220,23 @@ function ProposalVotesContent(props: ProposalVotesContentProps) {
   return (
     <>
       {!isLoading && (
-        <ProposalResults
-          strategies={proposalData.strategies}
-          choices={proposalData.choices}
-          results={resultData}
-          state={proposalData.state}
-          proposalData={proposalData}
-        />
+        <>
+          <ProposalResults
+            strategies={proposalData.strategies}
+            choices={proposalData.choices}
+            results={resultData}
+            state={proposalData.state}
+            proposalData={proposalData}
+          />
+          {!!votesData.length && (
+            <ProposalVotes
+              choices={proposalData.choices}
+              votes={votesData.slice(0, 10)}
+              strategies={proposalData.strategies}
+              totalVotes={votesData.length}
+            />
+          )}
+        </>
       )}
     </>
   );

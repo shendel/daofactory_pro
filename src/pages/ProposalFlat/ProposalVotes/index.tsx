@@ -17,25 +17,32 @@ function ProposalVotes(props: ProposalVotesType) {
   const tokenSymbol = strategies[0].params.symbol;
 
   return (
-    <div className="app-widget">
-      <div className="app-widget-header">
+    <div className="proposal-last-voters">
+      <h2>
         {translate('proposal_top_votes', 'Top {votes} of {totalVotes} votes', { votes: votes.length, totalVotes })}
-      </div>
-      <div>
-        {votes.map((voute, i) => {
-          return (
-            <div className="voteRow" key={i}>
-              <div className="voteCol">{shortEVMAddress(voute.voter)}</div>
-              <div className="voteCol">{choices[voute.choice - 1]}</div>
-              <div className="voteCol">
-                {`${voute.balance.toFixed(4)} ${tokenSymbol}`}
+      </h2>
+      <div className="-card">
+        <div className="-table">
+          <div className="-header">
+            <div>{`Address`}</div>
+            <div>{`Choise`}</div>
+            <div>{`Vote power`}</div>
+          </div>
+          {votes.map((voute, i) => {
+            return (
+              <div className="-rows" key={i}>
+                <div>{shortEVMAddress(voute.voter)}</div>
+                <div>{choices[voute.choice - 1]}</div>
+                <div>
+                  {`${voute.balance.toFixed(4)} ${tokenSymbol}`}
+                </div>
               </div>
-            </div>
-          );
-        })}
+            )
+          })}
+        </div>
       </div>
     </div>
-  );
+  )
 }
 
 export default ProposalVotes;
