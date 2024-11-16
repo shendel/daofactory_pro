@@ -1,12 +1,22 @@
 .App {
+  margin: auto;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue";
+  margin: auto;
+  padding: 0 10px;
   background: var(--bg-color);
   color: var(--text-color);
+}
+.App-flat {
+  background-color: hsl(var(--liteground));
+  color: hsl(var(--foreground));
   margin: auto;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: hsl(var(--liteground));
+  color: hsl(var(--foreground));
 }
 
 .content-wrapper {
@@ -15,10 +25,24 @@
   max-width: 880px;
   margin: auto;
   padding: 0 10px;
-
+}
+.content-wrapper-flat {
+  display: block;
+  margin-left: 250px;
+  margin-top: 5rem;
+  min-height: 100vh;
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
+        
   @media (max-width: 600px) {
     justify-content: initial;
     max-width: 100%;
+  }
+  
+  @media only screen and (max-width : 1024px) {
+    margin-left: 0;
   }
 }
 
@@ -26,7 +50,7 @@
   display: flex;
   flex-direction: column;
   padding-bottom: 2rem;
-  width: 80%;
+  width: 100%;
 
   @media (max-width: 600px) {
     width: 100%;

@@ -18,6 +18,7 @@ export type ProposalType = {
   created: number;
   plugins: IUniversalObj;
   network: string;
+  votes: number;
   type: "single-choice" | "basic";
   strategies: {
     name: string;
@@ -45,6 +46,8 @@ export type ShortProposalType = {
   state: string;
   author: string;
   created: number;
+  choices: string[];
+  votes: number;
   space: {
     avatar: string;
     id: string;
@@ -88,7 +91,7 @@ export const useProposal = (id: string, userWallet?: string | null | undefined) 
   const [ needRefresh, setNeedRefresh ] = useState<any>(userWallet)
   const [ account, setAccount ] = useState(userWallet)
   useEffect(() => {
-    if (needRefresh) {
+    if (needRefresh || userWallet == undefined) {
       setNeedRefresh(false)
       const _fetchData = async () => {
         try {
@@ -121,6 +124,8 @@ export const fetchOffChainProposal = async (id: string, userWallet?: string | nu
 };
 
 export const useProposalList = (params: FetchOffChainProposalListParams) => {
+  const { author_in } = params
+  const author = ( author_in && author_in.length > 0) ? author_in[0] : false
   const [isLoading, setIsLoading] = useState(false);
   const [offChainProposalList, setOffChainProposalList] = useState<
     ShortProposalType[]
@@ -140,7 +145,7 @@ export const useProposalList = (params: FetchOffChainProposalListParams) => {
       }
     };
     _fetchData();
-  }, []);
+  }, [ author ]);
 
   return {
     offChainProposalList,

@@ -35,7 +35,9 @@ const initAppConfig = () => {
   // 0 - with power (erc20-balance-of)
   // 1 - without power (erc20-with-balance)
   window.VOTE_STRATEGY = Number(appElement?.getAttribute('data-strategy')) || 0
-    
+  
+  window.FLAT_DESIGN = appElement?.getAttribute('data-flat-design') || true
+
 }
 
 export default initAppConfig

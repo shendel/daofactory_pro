@@ -38,6 +38,7 @@ export const PROPOSAL_QUERY = gql`
       created
       plugins
       network
+      votes
       type
       strategies {
         name
@@ -81,6 +82,8 @@ export const PROPOSALS_QUERY = gql`
       state
       author
       created
+      choices
+      votes
       space {
         id
         name

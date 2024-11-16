@@ -1,0 +1,356 @@
+.proposal-flat {
+  .-card {
+    color: hsl(var(--card-foreground));
+    background-color: hsl(var(--card));
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    position: relative;
+    border: 1px solid hsl(var(--border));
+  }
+  .proposal-header {
+    display: flex;
+    padding: 1.5rem;
+    align-items: center;
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: space-between;
+    
+    .proposal-title {
+      align-items: center;
+      width: 100%;
+      
+      H1 {
+        display: block;
+        padding: 0;
+        margin: 0;
+        font-weight: 700;
+        font-size: 1.5rem;
+        line-height: 2rem;
+        color: hsl(var(--card-foreground));
+      }
+      SPAN {
+        display: block;
+        font-size: .75rem;
+        line-height: 1rem;
+        color: hsl(var(--muted-foreground));
+      }
+    }
+    .proposal-owner {
+      width: 100%;
+      min-width: 0px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      border-radius: .25rem;
+      background-color: hsl(var(--muted));
+      padding-left: .75rem;
+      padding-right: .75rem;
+      padding-top: .5rem;
+      padding-bottom: .5rem;
+      font-size: .875rem;
+      line-height: 1.25rem;
+    }
+  }
+  .proposal-desc {
+    padding: 1.5rem;
+    SPAN {
+      display: block;
+      font-size: .75rem;
+      line-height: 1rem;
+      color: hsl(var(--muted-foreground));
+    }
+  }
+  .proposal-summary {
+    padding: 1.5rem;
+    display: grid;
+    row-gap: 1rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    @media only screen and (max-width : 1024px) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    @media only screen and (max-width : 800px) {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+    >DIV {
+      display: flex;
+      box-sizing: border-box;
+      width: 100%;
+      gap: 1rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      align-items: center;
+      border-right: 2px solid hsl(var(--border));
+      SVG {
+        color: rgb(79 70 229);
+        width: 3rem;
+        height: 3rem;
+        display: block;
+        vertical-align: middle;
+      }
+      DIV {
+        P,
+        A {
+          display: flex;
+          align-items: flex-end;
+          margin: 0;
+          padding: 0;
+          margin-bottom: .25rem;
+          font-size: 1.25rem;
+          line-height: 1.75rem;
+          font-weight: 700;
+          color: hsl(var(--card-foreground));
+          SVG {
+            width: 1.5rem;
+            height: 1.5rem;
+            margin-left: 0.5rem;
+            color: hsl(var(--card-foreground));
+          }
+        }
+        A:hover {
+          color: rgb(79, 70, 229);
+          SVG {
+            color: rgb(79, 70, 229);
+          }
+        }
+      }
+    }
+    >DIV:nth-child(3n) {
+      border-right: 0px;
+    }
+  }
+  .proposal-time-remaing {
+    padding: 1.5rem;
+    >P {
+      display: block;
+      padding: 0;
+      margin: 0;
+      text-align: center;
+      font-size: 1.5rem;
+      line-height: 2rem;
+      font-weight: 600;
+      margin-bottom: .75rem;
+      color: hsl(var(--foreground));
+    }
+    >SPAN {
+      display: block;
+      padding: 0;
+      margin: 0;
+      text-align: center;
+      color: hsl(var(--foreground));
+      margin-bottom: 1rem;
+      font-weight: 700;
+      font-size: 3.75rem;
+      line-height: 1;
+    }
+  }
+  .proposal-do-vote {
+    background-color: #4f46e5;
+    color: #FFF;
+    padding: 1.5rem;
+    >H2 {
+      font-size: 3.75rem;
+      line-height: 1;
+      color: #FFF;
+      font-weight: 900;
+      margin: 0;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      text-align: center;
+      >SPAN {
+        color: rgb(74 222 128);
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+    }
+    >SPAN {
+      display: block;
+      margin: 0;
+      text-align: center;
+      font-size: 1.125rem;
+      line-height: 1.75rem;
+      margin-bottom: 3rem;
+      color: #FFF;
+      &.-pending {
+        font-weight: 700;
+        font-size: 2rem;
+      }
+    }
+    .proposal-choices {
+      display: grid;
+      max-width: 56rem;
+      margin: 0 auto;
+      gap: 1.5rem;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      
+      &.-count-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      &.-count-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      &.-count-4 {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+      @media only screen and (max-width : 800px) {
+        &,
+        &.-count-3,
+        &.-count-2,
+        &.-count-4 {
+          grid-template-columns: repeat(1, minmax(0, 1fr));
+        }
+      }
+      DIV {
+        display: block;
+        color: hsl(var(--card-foreground));
+        background-color: hsl(var(--muted));
+        border-radius: var(--radius);
+        overflow: hidden;
+        position: relative;
+        border: 1px solid hsl(var(--border));
+        padding: 1.5rem;
+        text-align: center;
+        SPAN {
+          display: block;
+          width: 100%;
+          font-size: 3rem;
+          line-height: 1;
+          font-weight: 700;
+          margin-bottom: .25rem;
+        }
+        U {
+          display: block;
+          width: 100%;
+          font-size: .875rem;
+          line-height: 1;
+          font-weight: 700;
+          margin-bottom: .75rem;
+          text-decoration: none;
+        }
+        EM {
+          display: block;
+          width: 100%;
+          font-style: normal;
+          font-size: 1.125rem;
+          line-height: 1.75rem;
+          font-weight: 600;
+          margin-bottom: 1.5rem;
+        }
+        &.-not-active EM {
+          margin-bottom: 0;
+        }
+        BUTTON.do-vote {
+          color: hsl(var(--primary-foreground));
+          font-weight: 500;
+          font-size: .875rem;
+          line-height: 1.25rem;
+          padding-top: .5rem;
+          padding-bottom: .5rem;
+          padding-left: 1rem;
+          padding-right: 1rem;
+          background-color: hsl(var(--primary));
+          border-radius: calc(var(--radius) - 2px);
+          justify-content: center;
+          align-items: center;
+          height: 2.5rem;
+          display: inline-flex;
+          cursor: pointer;
+          line-height: 2rem;
+          border: 0;
+          &:hover {
+            background-color: hsl(var(--primary) / .9);
+          }
+          SVG {
+            margin-right: .5rem;
+          }
+        }
+      }
+    }
+  }
+  .proposal-last-voters {
+    >H2 {
+      display: block;
+      padding: 0;
+      margin: 0;
+      font-weight: 700;
+      font-size: 1.875rem;
+      line-height: 2.25rem;
+      margin-bottom: 1.5rem;
+      color: hsl(var(--foreground));
+    }
+    >DIV {
+      padding-top: 0rem;
+      padding-bottom: 1rem;
+    }
+    .-table {
+      .-header,
+      .-rows {
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+        border-bottom: 1px solid hsl(var(--border));
+      }
+      .-header {
+        DIV {
+          font-size: .875rem;
+          line-height: 1.25rem;
+          text-align: left;
+          padding-top: 1.5rem;
+          padding-bottom: 1.5rem;
+          padding-left: 1rem;
+          padding-right: 1rem;
+          color:  hsl(var(--card-foreground));
+          font-weight: 700;
+        }
+      }
+      .-rows {
+        DIV {
+          font-size: .875rem;
+          line-height: 1.25rem;
+          padding-top: .5rem;
+          padding-bottom: .5rem;
+          padding-left: 1rem;
+          padding-right: 1rem;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          color: hsl(var(--card-foreground));
+        }
+        &:last-child {
+          border: none;
+        }
+      }
+      .-header,
+      .-rows {
+        DIV:nth-child(1) {
+          width: 60%;
+        }
+        DIV:nth-child(2) {
+          width: 20%;
+        }
+        DIV:nth-child(3) {
+          width: 20%;
+        }
+      }
+    }
+  }
+}
+
+.proposal {
+  .proposalTitle {
+    font-size: 36px;
+  }
+
+  .proposalHeader {
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+
+    .proposalState {
+      padding: 0.5rem;
+      border: 1px solid var(--border-color);
+      border-radius: 2rem;
+    }
+  }
+}

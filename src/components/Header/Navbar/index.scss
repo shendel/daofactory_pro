@@ -11,7 +11,14 @@
   text-decoration: inherit !important; /* no underline */
   outline: none;
 
+  transition-property: opacity;
+  transition-timing-function: cubic-bezier(.4,0,.2,1);
+  transition-duration: .15s;
+  
   &.active {
     color: var(--link-color);
+  }
+  &:hover {
+    opacity: .75;
   }
 }

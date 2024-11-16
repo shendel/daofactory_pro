@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { useWeb3React } from "@web3-react/core"
 import { NETWORK_EXPLORER_URLS, SupportedChainId } from "src/helpers/constants";
 import { useClient } from "src/hooks/useClient";
 import { ProposalType } from "src/hooks/useProposals";
@@ -13,17 +13,29 @@ import Spinner from "src/components/Spinner";
 import { useTokenBalance } from "src/hooks/useTokenBalance";
 
 import { translate } from "src/utils/translate"
+import ConnectWallet from '../ConnectWallet'
 
 type VotingModalButtonProps = {
   proposal: ProposalType;
   checkedChoice: number;
+  className?: string
+  children?: any
 };
 
 function VotingModalButton(props: VotingModalButtonProps) {
-  const { proposal, checkedChoice } = props;
+  const {
+    proposal,
+    checkedChoice,
+    className,
+    children,
+  } = props;
   const requiredAmountToVote = parseFloat(window.REQUIRED_AMOUNT_TO_VOTE);
 
   const { balance, isTokenBalanceLoading } = useTokenBalance();
+  
+  const {
+    account
+  } = useWeb3React()
 
   const [isEnoughBalanceToPublish, setIsEnoughBalanceToPublish] = useState(balance >= requiredAmountToVote);
   const [isActive, setIsActive] = useState( checkedChoice !== -1 && proposal.state !== "pending" && !isTokenBalanceLoading && isEnoughBalanceToPublish);
@@ -58,26 +70,37 @@ function VotingModalButton(props: VotingModalButtonProps) {
   };
 
   const needWhitelist = (proposal && proposal.whitelisted && !proposal.whitelist_allowed)
+  
+  if (!account) {
+    return (
+      <ConnectWallet fullWidth={true} isPrimary={true} isActive={(checkedChoice !== -1 && proposal.state !== "pending")} />
+    )
+  }
   return (
     <button
-      className={`primaryButton ${isActive ? "active" : ""}`}
+      className={(className) ? className : `primaryButton ${isActive ? "active" : ""}`}
       disabled={!isActive || needWhitelist}
       onClick={onVoteClick}
     >
-      <span>
-        {
-          needWhitelist
-          ? translate('vote_you_are_not_allowed', "You are not on the list of those allowed to vote.")
-          : proposal.state === "pending"
-          ? translate('vote_wait_for_start', "Wait for voting start")
-          : checkedChoice === -1
-          ? translate('vote_make_your_choice', "Make your choice")
-          : isTokenBalanceLoading
-          ? translate('vote_checking_balance', "Checking balance...")
-          : !isEnoughBalanceToPublish
-          ? translate('vote_minimum_req', `Minimum required amount to Vote is`) + `${requiredAmountToVote} ${window.TOKEN_SYMBOL}`
-          : translate('vote_make_vote', "Vote")}
-      </span>
+      {children
+        ? children 
+        : (
+          <span>
+            {
+              needWhitelist
+              ? translate('vote_you_are_not_allowed', "You are not on the list of those allowed to vote.")
+              : proposal.state === "pending"
+              ? translate('vote_wait_for_start', "Wait for voting start")
+              : checkedChoice === -1
+              ? translate('vote_make_your_choice', "Make your choice")
+              : isTokenBalanceLoading
+              ? translate('vote_checking_balance', "Checking balance...")
+              : !isEnoughBalanceToPublish
+              ? translate('vote_minimum_req', `Minimum required amount to Vote is`) + `${requiredAmountToVote} ${window.TOKEN_SYMBOL}`
+              : translate('vote_make_vote', "Vote")}
+          </span>
+        )
+      }
     </button>
   );
 }

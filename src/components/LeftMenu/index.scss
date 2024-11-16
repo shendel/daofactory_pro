@@ -1,0 +1,116 @@
+.leftMenuToggle {
+  display: none;
+  position: fixed;
+  left: 0.25rem;
+  top: 1.35rem;
+  width: 0px;
+  height: 0px;
+  z-index: 40;
+  cursor: pointer;
+  &::after {
+    display: block;
+    position: fixed;
+    content: '';
+    width: 2rem;
+    height: 2rem;
+    background-image: url(/assets/svg/flat/icon-asidemenu.svg);
+    background-position: center;
+    border-radius: calc(var(--radius) - 2px);
+    background-repeat: no-repeat;
+  }
+}
+
+@media only screen and (max-width : 1024px) {
+  .leftMenuToggle {
+    display: block;
+  }
+  .leftMenuToggle + .asideHolder .leftMenu {
+    transform: translate(-250px, 0);
+  }
+}
+
+
+.leftMenuToggle:checked::after {
+  background-color: hsl(var(--accent));
+}
+.leftMenuToggle:checked + .asideHolder .leftMenu {
+  transform: translate(0, 0);
+}
+.leftMenuToggle:checked + .asideHolder .leftMenuBg {
+  display: block;
+}
+.leftMenuBg {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background: #00000080;
+  z-index: 30;
+}
+.leftMenu {
+  display: block;
+  animation-duration: .3s;
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(.4,0,.2,1);
+  transition-duration: .3s;
+  padding-top: 5rem;
+  background-color: hsl(var(--background));
+  border-right: 1px solid hsl(var(--border));
+  max-width: 100%;
+  width: 250px;
+  height: 100%;
+  z-index: 30;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  
+  &.hidden {
+    transform: translate(-250px, 0);
+  }
+  .menuHolder {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: .75rem;
+    padding-right: .75rem;
+    
+    A {
+      display: block;
+      transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+      transition-timing-function: cubic-bezier(.4,0,.2,1);
+      transition-duration: .15s;
+      font-weight: 500;
+      text-decoration: none;
+      font-size: 1rem;
+      line-height: 1.5rem;
+      padding-top: .5rem;
+      padding-bottom: .5rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      border-radius: calc(var(--radius) - 2px);
+      justify-content: flex-start;
+      align-items: center;
+      height: auto;
+      color: hsl(var(--foreground));
+      margin-bottom: 0.5rem;
+      &:hover,
+      &.active {
+        background-color: hsl(var(--accent));
+        color: hsl(var(--accent-foreground));
+      }
+      
+      SVG {
+        vertical-align: middle;
+        height: 1.25rem;
+        width: 1.25rem;
+        margin-right: .5rem;
+      }
+      SPAN {
+        vertical-align:middle;
+      }
+    }
+  }
+}

@@ -87,7 +87,7 @@ function CreateProposalActions(props: CreateProposalActionsType) {
       const dateStart = space.voting?.delay
         ? dateNow + space.voting.delay
         : dateNow;
-
+        
       const dateEnd = space.voting?.period
         ? dateStart + space.voting.period
         : dateStart + durationOptions[selectedDuration].value || 3600;

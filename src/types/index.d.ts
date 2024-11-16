@@ -31,6 +31,8 @@ declare global {
     
     opr: any
     opera: any
+    
+    FLAT_DESIGN: any
   }
   
   interface IUniversalObj {

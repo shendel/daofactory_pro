@@ -5,7 +5,7 @@ import "./index.scss";
 
 function Header() {
   return (
-    <div className="header">
+    <div className={(window.FLAT_DESIGN) ? 'header-flat' : 'header'}>
       <Navbar />
       <ConnectWallet />
     </div>
