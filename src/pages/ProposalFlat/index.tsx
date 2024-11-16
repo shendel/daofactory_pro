@@ -27,6 +27,7 @@ import { ReactComponent as ICON_Ipfs } from "src/assets/svg/flat/icon-ipfs.svg"
 import { NETWORK_EXPLORER_URLS, SupportedChainId } from "src/helpers/constants";
 import { shortEVMAddress, shortIPFS } from "src/helpers/utils";
 
+import CountDown from "src/components/CountDown"
 
 type ParamsProps = {
   proposalId?: string;
@@ -187,7 +188,9 @@ console.log('>>> isLoading', isLoading)
             && (
             <div className="proposal-time-remaing">
               <p>Time Remaing</p>
-              <span>333:3:33:33</span>
+              <span>
+                <CountDown target={new Date((proposalData.state == 'pending' ? proposalData.start : proposalData.end) * 10 **3 )} />
+              </span>
             </div>
           )}
           <ProposalVotesContent proposalData={proposalData} />
