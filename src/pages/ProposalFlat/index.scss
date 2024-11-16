@@ -50,6 +50,17 @@
       padding-bottom: .5rem;
       font-size: .875rem;
       line-height: 1.25rem;
+      
+      A {
+        color: rgb(79, 70, 229);
+        font-weight: 700;
+        text-decoration: none;
+        
+        SVG {
+          width: 1rem;
+          height: 1rem;
+        }
+      }
     }
   }
   .proposal-desc {
@@ -335,22 +346,14 @@
     }
   }
 }
-
-.proposal {
-  .proposalTitle {
-    font-size: 36px;
-  }
-
-  .proposalHeader {
-    display: flex;
-    justify-content: space-between;
-    color: var(--text-color);
-    margin-bottom: 1rem;
-
-    .proposalState {
-      padding: 0.5rem;
-      border: 1px solid var(--border-color);
-      border-radius: 2rem;
+[data-color-theme="dark"] {
+  .proposal-flat {
+    .proposal-header {
+      .proposal-owner {
+        A {
+          color: #FFF;
+        }
+      }
     }
   }
 }

@@ -84,6 +84,15 @@ class DaoFactory_Pro_Meta_Box {
         </td>
       </tr>
       <tr>
+        <th><label><?php echo esc_html__( 'Design', 'daofactory_pro' );?></label></th>
+        <td>
+          <select name="dao_design" id="dao_design" value="<?php echo $daoinfo['design']?>">
+            <option value="" <?php echo ('' == $daoinfo['design']) ? 'selected' : ''?>><?php echo esc_html__('Default', 'daofactory_pro'); ?></option>
+            <option value="flat" <?php echo ('flat' == $daoinfo['design']) ? 'selected' : ''?>><?php echo esc_html__('Flat', 'daofactory_pro'); ?></option>
+          </select>
+        </td>
+      </tr>
+      <tr>
         <th><label><?php echo esc_html__( 'Theme', 'daofactory_pro' );?></label></th>
         <td>
           <select name="dao_theme" id="dao_theme" value="<?php echo $daoinfo['theme']?>">
@@ -216,6 +225,7 @@ class DaoFactory_Pro_Meta_Box {
       'token_symbol'      => 'dao_token_symbol',
       'token_decimals'    => 'dao_token_decimals',
       'theme'             => 'dao_theme',
+      'design'            => 'dao_design',
       'strategy'          => 'dao_strategy',
       'required_amount_to_publish' => 'dao_required_amount_to_publish',
       'required_amount_to_vote' => 'dao_required_amount_to_vote',

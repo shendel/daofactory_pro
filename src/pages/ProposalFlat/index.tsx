@@ -99,7 +99,13 @@ function ProposalFlat() {
             </div>
             <div className="proposal-owner">
               {`Author: `}
-              {proposalData?.author}
+              <a
+                href={`${NETWORK_EXPLORER_URLS[networkId]}address/${proposalData?.author}}`}
+                target="_blank"
+              >
+                <ICON_Link />
+                {proposalData?.author}
+              </a>
             </div>
           </div>
           {body && body != '' && (
@@ -219,6 +225,26 @@ function ProposalVotesContent(props: ProposalVotesContentProps) {
 
   return (
     <>
+      <ProposalResults
+        isLoading={true}
+        strategies={proposalData.strategies}
+        choices={proposalData.choices}
+        results={resultData}
+        state={proposalData.state}
+        proposalData={proposalData}
+      />
+      {!!votesData.length && (
+        <ProposalVotes
+          choices={proposalData.choices}
+          votes={votesData.slice(0, 10)}
+          strategies={proposalData.strategies}
+          totalVotes={votesData.length}
+        />
+      )}
+    </>
+  );
+  return (
+    <>
       {!isLoading && (
         <>
           <ProposalResults
@@ -227,6 +253,7 @@ function ProposalVotesContent(props: ProposalVotesContentProps) {
             results={resultData}
             state={proposalData.state}
             proposalData={proposalData}
+            isLoading={isLoading}
           />
           {!!votesData.length && (
             <ProposalVotes

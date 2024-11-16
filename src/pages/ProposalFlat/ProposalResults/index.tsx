@@ -13,6 +13,8 @@ type ProposalResultsProps = {
   strategies: ProposalType["strategies"];
   state: string;
   proposalData: any
+  isLoading: boolean
+  
 };
 
 function ProposalResults(props: ProposalResultsProps) {
