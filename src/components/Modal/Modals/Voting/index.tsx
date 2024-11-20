@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { useWeb3React } from "@web3-react/core"
 import { NETWORK_EXPLORER_URLS, SupportedChainId } from "src/helpers/constants";
 import { useClient } from "src/hooks/useClient";
 import { ProposalType } from "src/hooks/useProposals";
@@ -13,17 +13,31 @@ import Spinner from "src/components/Spinner";
 import { useTokenBalance } from "src/hooks/useTokenBalance";
 
 import { translate } from "src/utils/translate"
+import ConnectWallet from '../ConnectWallet'
 
 type VotingModalButtonProps = {
   proposal: ProposalType;
   checkedChoice: number;
+  className?: string
+  children?: any
+  flat?: boolean
 };
 
 function VotingModalButton(props: VotingModalButtonProps) {
-  const { proposal, checkedChoice } = props;
+  const {
+    proposal,
+    checkedChoice,
+    className,
+    children,
+    flat
+  } = props;
   const requiredAmountToVote = parseFloat(window.REQUIRED_AMOUNT_TO_VOTE);
 
   const { balance, isTokenBalanceLoading } = useTokenBalance();
+  
+  const {
+    account
+  } = useWeb3React()
 
   const [isEnoughBalanceToPublish, setIsEnoughBalanceToPublish] = useState(balance >= requiredAmountToVote);
   const [isActive, setIsActive] = useState( checkedChoice !== -1 && proposal.state !== "pending" && !isTokenBalanceLoading && isEnoughBalanceToPublish);
@@ -41,6 +55,7 @@ function VotingModalButton(props: VotingModalButtonProps) {
     setIsEnoughBalanceToPublish(balance >= requiredAmountToVote)
   }, [balance]);
 
+  
   const modalProps = {
     headerContent: translate('vote_confirm_vote', "Confirm vote"),
     bodyContent: (
@@ -58,13 +73,17 @@ function VotingModalButton(props: VotingModalButtonProps) {
   };
 
   const needWhitelist = (proposal && proposal.whitelisted && !proposal.whitelist_allowed)
-  return (
-    <button
-      className={`primaryButton ${isActive ? "active" : ""}`}
-      disabled={!isActive || needWhitelist}
-      onClick={onVoteClick}
-    >
-      <span>
+  
+  if (!account) {
+    return (
+      <ConnectWallet fullWidth={true} isPrimary={true} isActive={(checkedChoice !== -1 && proposal.state !== "pending")} />
+    )
+  }
+  
+  
+  const getButtonTitle = () => {
+    return (
+      <>
         {
           needWhitelist
           ? translate('vote_you_are_not_allowed', "You are not on the list of those allowed to vote.")
@@ -76,8 +95,53 @@ function VotingModalButton(props: VotingModalButtonProps) {
           ? translate('vote_checking_balance', "Checking balance...")
           : !isEnoughBalanceToPublish
           ? translate('vote_minimum_req', `Minimum required amount to Vote is`) + `${requiredAmountToVote} ${window.TOKEN_SYMBOL}`
-          : translate('vote_make_vote', "Vote")}
-      </span>
+          : translate('vote_make_vote', "Vote")
+        }
+      </>
+    )
+  }
+  
+  const onVoteClickDisabled = () => {
+    setModalOptions({
+      isOpen: true,
+      modalProps: {
+        headerContent: translate('vote_confirm_vote', "Confirm vote"),
+        bodyContent: (
+          <VoteModalEnoughBalance
+            content={getButtonTitle()}
+            handleClose={() => {
+              closeModal()
+            }}
+          />
+        ),
+        onCancel: () => closeModal(),
+      }
+    })
+  }
+  
+  if (flat && !isActive || needWhitelist) {
+    return (
+      <button
+        className={(className) ? className : `primaryButton ${isActive ? "active" : ""}`}
+        onClick={onVoteClickDisabled}
+      >
+        {children}
+      </button>
+    )
+  }
+  
+  return (
+    <button
+      className={(className) ? className : `primaryButton ${isActive ? "active" : ""}`}
+      disabled={!isActive || needWhitelist}
+      onClick={onVoteClick}
+    >
+      {children
+        ? children 
+        : (
+          <span>{getButtonTitle()}</span>
+        )
+      }
     </button>
   );
 }
@@ -88,6 +152,30 @@ type VotingModalContentProps = {
   closeModal: () => void;
 };
 
+const VoteModalEnoughBalance = (props: any) => {
+  const {
+    content,
+    handleClose,
+  } = props
+  return (
+    <>
+      <div className="voteBody">
+        <div className="textCenter boldText">
+          {content}
+        </div>
+        <div className="textCenter p-1 border-t">
+        <button
+          type="button"
+          className={`primaryButton active`}
+          onClick={handleClose}
+        >
+          {`Close`}
+        </button>
+      </div>
+      </div>
+    </>
+  )
+}
 const VoteModalContent = (props: VotingModalContentProps) => {
   const navigate = useNavigate();
 

@@ -17,7 +17,14 @@ import {
   switchConnectorNetwork
 } from 'src/web3/connections'
 
-function ConnectWallet() {
+function ConnectWallet(props: any) {
+  const {
+    fullWidth,
+    isPrimary,
+    isActive,
+    connectTitle,
+    className
+  } = props
   const {
     account,
     // deactivate,
@@ -46,6 +53,7 @@ function ConnectWallet() {
       style={{
         display: "flex",
         padding: "1rem",
+        ...((fullWidth) ? { width: '100%' } : {})
       }}
     >
       <button
@@ -123,9 +131,9 @@ function ConnectWallet() {
     return (
       <button
         id="connect-button"
-        className="secondaryButton connectButton"
+        className={`${(isPrimary) ? 'primaryButton' : 'secondaryButton'} ${(isActive) ? 'active' : ''}`}
         onClick={tryChangeNetwork}
-        style={{ width: "auto" }}
+        style={{ width: (fullWidth) ? '100%' : 'auto' }}
       >
         {isSwitchNetwork && (<Spinner />)}
         {`Switch network`}
@@ -135,16 +143,16 @@ function ConnectWallet() {
   return (
     <button
       id="connect-button"
-      className="secondaryButton"
+      className={(className) ? className : `${(isPrimary) ? 'primaryButton' : 'secondaryButton'} ${(isActive) ? 'active' : ''}`}
       onClick={() =>
         setModalOptions({
           isOpen: true,
           modalProps: account ? accountModalProps : connectWalletModalProps,
         })
       }
-      style={{ width: "auto" }}
+      style={{ width: (fullWidth) ? '100%' : 'auto' }}
     >
-      {account ? shortEVMAddress(account) : translate('wallet_connect', "Connect Wallet")}
+      {account ? shortEVMAddress(account) : connectTitle ? connectTitle : translate('wallet_connect', "Connect Wallet")}
     </button>
   );
 }

@@ -5,8 +5,8 @@ const initAppConfig = () => {
   window.TIME_ZONE = appElement?.getAttribute("data-timezone") || Intl.DateTimeFormat().resolvedOptions().timeZone;
   window.TIME_ZONE_ADD = appElement?.getAttribute("data-timezone-add") || "";
   window.TIME_ZONE_LOCALE = appElement?.getAttribute("data-timezone-locale") || "en";
-  window.SNAPSHOTHUB = appElement?.getAttribute("data-snapshothub") || "http://localhost:3500"; //"https://snapshothub.onout.org";
-  window.ENS_DOMAIN = appElement?.getAttribute("data-ens") || "onout.eth";
+  window.SNAPSHOTHUB = appElement?.getAttribute("data-snapshothub") || "https://snapshothub.onout.org"; // //"https://snapshothub.onout.org"; "http://localhost:3500"; //
+  window.ENS_DOMAIN = appElement?.getAttribute("data-ens") || "onout.eth"; //"eneeseene.test" //"onout.eth";
   window.NETWORK_ID = appElement?.getAttribute("data-network") || "1"; //"11155111";
   window.TOKEN_ADDRESS =
     appElement?.getAttribute("data-token-address") ||
@@ -17,7 +17,7 @@ const initAppConfig = () => {
   window.TOKEN_DECIMALS = appElement?.getAttribute("data-token-decimals") || "9" // "18";
 
   window.COLOR_TEMPLATE =
-    appElement?.getAttribute("data-color-template") || "light_template";
+    appElement?.getAttribute("data-color-template") || "light_template" // "dark_template"
 
   window.HIDE_SERVICE_LINK = appElement?.getAttribute("data-hide-service-link") === 'true';
   window.REQUIRED_AMOUNT_TO_PUBLISH = appElement?.getAttribute("data-required-amount-to-publish") || 5;
@@ -35,7 +35,9 @@ const initAppConfig = () => {
   // 0 - with power (erc20-balance-of)
   // 1 - without power (erc20-with-balance)
   window.VOTE_STRATEGY = Number(appElement?.getAttribute('data-strategy')) || 0
-    
+  
+  window.FLAT_DESIGN = true //appElement?.getAttribute('data-flat-design')  == 'true'
+
 }
 
 export default initAppConfig

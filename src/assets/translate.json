@@ -64,5 +64,10 @@
   "proposal_created_by": "Created by {author}",
   "proposal_state_active": "Active",
   "proposal_state_closed": "Closed",
-  "proposal_state_pending": "Pending"
+  "proposal_state_pending": "Pending",
+  
+  "proposal_end_date": "End date",
+  "proposal_start_date": "Start date",
+  "page_my_proposals_title": "My Proposals",
+  "page_my_proposals_connect_wallet": "Connect your wallet to see your proposals"
 }

@@ -22,6 +22,21 @@ window.TRANSLATE = {
 
 const appElement = document.getElementById("daofactory_pro_app")
 
+
+/* AsideMenu - process */
+document.addEventListener('click', function (event: any) {
+  if ((event.target.id === 'leftMenuItemsHolder')
+    || (event.target.parentNode.id === 'leftMenuItemsHolder')
+    || (event.target.parentNode.parentNode.id === 'leftMenuItemsHolder')
+  ) {
+    const menuToggler: any = document.getElementById('leftMenuToggle')
+    if (menuToggler) {
+      menuToggler.checked = false
+    }
+  }
+})
+/* ------------------ */
+
 ReactDOM.render(
   <React.StrictMode>
     <Web3ContextProvider>

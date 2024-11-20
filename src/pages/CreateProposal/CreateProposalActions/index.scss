@@ -52,10 +52,10 @@
     margin-left: 0.2em;
     background: none;
     cursor: pointer;
-    &:hover SVG {
+    &:hover svg {
       color: var(--primary-color);
     }
-    SVG {
+    svg {
       display: block;
       width: 24px;
       height: 24px;
@@ -97,7 +97,7 @@
     padding: 0.25em;
     border-radius: 0.5rem;
     cursor: pointer;
-    SVG {
+    svg {
       width: 24px;
       height: 24px;
     }

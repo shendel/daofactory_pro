@@ -13,6 +13,7 @@ function daofactory_pro_get_data($dao_id) {
     'strategy'          => '0',
     'required_amount_to_publish' => '5',
     'required_amount_to_vote' => '1',
+    'design'            => ''
   ) as $key => $default) {
     $data = get_post_meta( $dao_id, $key, true);
     if ( empty( $data ) ) $data = $default;
@@ -99,6 +100,7 @@ function daofactory_pro_get_html($dao_id) {
     data-wcv2-project-id="' . (($daofactory_pro_wc2_enabled == 'true') ? esc_attr($daofactory_pro_wc2_pr_id) : '') . '"
     data-wallet-coinbase="' . (($daofactory_pro_coinbase_enabled == 'true') ? '1' : '0') . '"
     data-infura-key="' . esc_attr($daofactory_pro_infurakey) . '"
+    data-flat-design="' . esc_attr(($daoinfo['design'] == 'flat') ? 'true' : '') . '"
     ></div>
   ';
   return $html;

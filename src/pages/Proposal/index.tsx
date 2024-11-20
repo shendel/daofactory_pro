@@ -27,11 +27,12 @@ function ProposalDetail() {
 
   useEffect(() => {
     console.log('>>> DO REFRESH ON CHANGE ACCOUNT', account)
-    setNeedRefresh(account)
+    if (account) setNeedRefresh(account)
   }, [ account ])
   const { id, space, snapshot, network, strategies, state, choices } =
     proposalData;
-
+console.log('>>> proposalData', proposalData)
+console.log('>>> isLoading', isLoading)
   const haveDataForRenderOtherElements = !!(
     id &&
     space?.id &&
