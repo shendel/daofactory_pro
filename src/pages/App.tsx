@@ -11,6 +11,8 @@ import NotFound from "./NotFound"
 import ServiceLink from "src/components/ServiceLink"
 import Header from "src/components/Header"
 import LeftMenu from "src/components/LeftMenu"
+import MDPage from "src/pages/MDPage"
+
 import "./App.scss";
 
 function App() {
@@ -28,11 +30,11 @@ function App() {
               <Route path="/" element={<Proposals />} />
               <Route path="/proposals" element={<Proposals />} />
               <Route path="/proposals/my" element={<Proposals onlyMy={true} />} />
-              <Route path="/about" element={<About />} />
               <Route path="/proposal">
                 <Route path="create" element={<CreateProposal />} />
                 <Route path=":proposalId" element={(window.FLAT_DESIGN) ? <ProposalFlat /> : <Proposal />} />
               </Route>
+              <Route path="/about" element={<MDPage title={`About`} source={`about.md`} />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </div>

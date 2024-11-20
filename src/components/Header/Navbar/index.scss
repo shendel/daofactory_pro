@@ -1,5 +1,12 @@
 .navbar {
   display: flex;
+  .flatLogo {
+    width: 100px;
+    height: 3rem;
+    background: url(logo.svg) no-repeat;
+    background-size: contain;
+    background-position: 50% 50%;
+  }
 }
 
 .navbar-item {

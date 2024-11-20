@@ -86,6 +86,7 @@ function ProposalResults(props: ProposalResultsProps) {
                       <VotingModalButton
                         checkedChoice={i}
                         proposal={proposalData}
+                        flat={true}
                         className="do-vote"
                       >
                         <>

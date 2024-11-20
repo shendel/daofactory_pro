@@ -5,8 +5,8 @@ const initAppConfig = () => {
   window.TIME_ZONE = appElement?.getAttribute("data-timezone") || Intl.DateTimeFormat().resolvedOptions().timeZone;
   window.TIME_ZONE_ADD = appElement?.getAttribute("data-timezone-add") || "";
   window.TIME_ZONE_LOCALE = appElement?.getAttribute("data-timezone-locale") || "en";
-  window.SNAPSHOTHUB = appElement?.getAttribute("data-snapshothub") || "https://snapshothub.onout.org"; //"http://localhost:3500"; //"https://snapshothub.onout.org";
-  window.ENS_DOMAIN = appElement?.getAttribute("data-ens") || "eneeseene.test" //"onout.eth";
+  window.SNAPSHOTHUB = appElement?.getAttribute("data-snapshothub") || "https://snapshothub.onout.org"; // //"https://snapshothub.onout.org"; "http://localhost:3500"; //
+  window.ENS_DOMAIN = appElement?.getAttribute("data-ens") || "onout.eth"; //"eneeseene.test" //"onout.eth";
   window.NETWORK_ID = appElement?.getAttribute("data-network") || "1"; //"11155111";
   window.TOKEN_ADDRESS =
     appElement?.getAttribute("data-token-address") ||

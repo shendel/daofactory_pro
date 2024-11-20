@@ -100,7 +100,7 @@ function ProposalFlat() {
             <div className="proposal-owner">
               {`Author: `}
               <a
-                href={`${NETWORK_EXPLORER_URLS[networkId]}address/${proposalData?.author}}`}
+                href={`${NETWORK_EXPLORER_URLS[networkId]}address/${proposalData?.author}`}
                 target="_blank"
               >
                 <ICON_Link />
@@ -135,7 +135,7 @@ function ProposalFlat() {
               <ICON_Reqs />
               <div>
                 <a
-                  href={`${NETWORK_EXPLORER_URLS[networkId]}address/${tokenAddress}}`}
+                  href={`${NETWORK_EXPLORER_URLS[networkId]}address/${tokenAddress}`}
                   target="_blank"
                 >
                   {window.REQUIRED_AMOUNT_TO_VOTE}
@@ -150,7 +150,7 @@ function ProposalFlat() {
               <div>
                 <ICON_Ipfs />
                 <div>
-                  <a href={`https://cloudflare-ipfs.com/ipfs/${ipfs}`} target="_blank">
+                  <a href={`https://dweb.link/ipfs/${ipfs}`} target="_blank">
                     {shortIPFS(ipfs)}
                     <ICON_Link />
                   </a>
